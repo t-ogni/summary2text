@@ -11,7 +11,7 @@ int main(){
         std::cout << "\n ok: \n";
          a = C.int2text(get);
 
-        std::cout << a << " рублей\n ";
+        std::cout << a << std::endl;
     }
     return 0;
 }
