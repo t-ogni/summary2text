@@ -4,44 +4,98 @@
 #define STRINGTOTEXT_LIBRARY_H
 
 
+enum a {  RUSSIAN=0,
+        ENGLISH,
+        LEN_LANGS};
+
+
+//sorry, if i maked a mistake in ENGLISH translation :(
 class converter {
 private:
     long long int MAXIMUM_NUMBER = 999999999999;
-    std::string units[10] = {"", "од", "дв",
-            "три ", "четыре ", "п€ть ",
-            "шесть ", "семь ", "восемь ", "дев€ть "};
-
-    std::string teens[10] =  {"дес€ть ", "одинадцать ",
-                              "двенадцать ", "тринадцать ",
-                              "четырнадцать ", "п€тнадцать ",
-                              "шеснадцать ", "семьнадцать ",
-                              "восемьнадцать ", "дев€тнадцать "};
-    std::string tens[10] = {
-                            "", "", "двадцать ", "тридцать ",
-                            "сорок ", "п€тьдес€т ",
-                            "шестьдес€т ", "семьдес€т ",
-                            "восемьдес€т ", "дев€носто "
+    std::string units[LEN_LANGS][10] = {
+            {
+                "", "од", "дв", "три ",
+                "четыре ", "п€ть ", "шесть ",
+                "семь ", "восемь ", "дев€ть "
+            },
+            {
+                "", "one ", "two ", "three ",
+                "four ", "five ", "six ",
+                "seven ", "eight ", "nine "
+            }
     };
 
-    std::string hundreds[10] = {
-            "", "сто ", "двести ",
-            "триста ", "четыреста ",
-            "п€тьсот ", "шестьсот ",
-            "семьсот ", "восемьсот ",
-            "дев€тьсот " };
+    std::string teens[LEN_LANGS][10] =  {
+            {
+                    "дес€ть ", "одинадцать ",
+                  "двенадцать ", "тринадцать ",
+                  "четырнадцать ", "п€тнадцать ",
+                  "шеснадцать ", "семьнадцать ",
+                  "восемьнадцать ", "дев€тнадцать "
+            },
+            {
+                  "ten ", "eleven ",
+                  "twelve ", "thirteen ",
+                  "fourteen ", "fifteen ",
+                  "sixteen ", "seventeen ",
+                  "eighteen ", "nineteen "
+             }
+    };
+    std::string tens[LEN_LANGS][10] = {
+            {
+                "", "", "двадцать ", "тридцать ",
+                "сорок ", "п€тьдес€т ",
+                "шестьдес€т ", "семьдес€т ",
+                "восемьдес€т ", "дев€носто "
+            },
+            {
+                "", "", "twenty ", "thirty ",
+                "forty ", "fifty ",
+                "sixty ", "seventy ",
+                "eighty ", "ninety "
+            }
+    };
 
-    std::string forms[4][4] = {
-            {"m"},
-            {"t", "тыс€ча ",   "тыс€чи ",    "тыс€ч "},
-            {"m", "миллион ",  "миллиона ",  "миллионов "},
-            {"m", "миллиард ", "миллиарда ", "миллиардов "}
+    std::string hundreds[LEN_LANGS][10] = {
+            {
+                "", "сто ", "двести ",
+                "триста ", "четыреста ",
+                "п€тьсот ", "шестьсот ",
+                "семьсот ", "восемьсот ",
+                "дев€тьсот "
+            },
+            {
+                "", "one hundred ", "two hundred",
+                "three hundred ", "four hundred ",
+                "five hundred ", "six hundred ",
+                "seven hundred ", "eight hundred ",
+                "nine hundred "
+            }
+    };
+
+    std::string forms[LEN_LANGS][4][4] = {
+            {
+                  {"m"},
+                  {"t", "тыс€ча ", "тыс€чи ", "тыс€ч "},
+                  {"m", "миллион ", "миллиона ", "миллионов "},
+                  {"m", "миллиард ", "миллиарда ", "миллиардов "}
+            },
+            {
+                   {"m"},
+                   {"t", "thousand ", "thousand ", "thousand "},
+                   {"m", "million ", "million ", "million "},
+                   {"m", "billion ", "billion ", "billion "},
+            }
     }; //   primary,    secondary,  remaning, form
 
-
-
-    std::string blocks(int block, int index);
+    std::string zero[LEN_LANGS] = {"Ќоль ", "Zero "};
+    std::string minus[LEN_LANGS] = {"ћинус ", "Minus "};
+    std::string owerflowErr[LEN_LANGS] = {"„исло слижком большое дл€ вывода.",
+                                          "Number is too big for output"};
+    std::string blocks(int block, int index, int language);
 public:
-    std::string int2text(long long int number);
+    std::string int2text(long long int number, int language = RUSSIAN);
 
 };
 
